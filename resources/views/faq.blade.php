@@ -40,8 +40,7 @@
                 shop?</label>
             <div class="content">
                 <p>
-                    • Go to the <a target="_blank"
-                                   href="https://webshop.hz.nl/WebshopApp/default.aspx?menu=082076044027019251066025111065201099237062130097">HZ
+                    • Go to the <a target="_blank" href="https://webshop.hz.nl/WebshopApp/default.aspx?menu=082076044027019251066025111065201099237062130097">HZ
                         webshop</a><br>
                     • Log in.<br>
                     • Search for the product you want and select the option you want<br>
@@ -82,6 +81,56 @@
                 </p>
             </div>
         </li>
+        @foreach($faqs as $faq)
+        <li>
+            <input type="checkbox" name="accordion" id="{{ $faq->id }}">
+            <label for="{{ $faq->id }}">{{ $faq->question }}<a href="{{ route ('faq.edit') }}">Edit</a><button id="deleteBtn{{ $faq->id }}">Delete</button></label>
+            <div class="content">
+                <p>{{ $faq->answer     }}</p>
+            </div>
+        </li>
+
+            <div id="deleteModal{{ $faq->id }}" class="modal">
+                <div class="modal-content">
+                    <span class="close closeBtn" data-id="{{ $faq->id }}">&times;</span>
+                    <p class="has-text-centered">ARE YOU SURE YOU WANT TO DELETE????????</p>
+                    <div class="level">
+                        <form action="{{ route('faq.delete', $faq->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    document.querySelectorAll("[id^='deleteBtn']").forEach((button) => {
+                        button.addEventListener("click", function () {
+                            const id = this.id.replace("deleteBtn", ""); // Extract FAQ ID
+                            document.getElementById("deleteModal" + id).style.display = "block";
+                        });
+                    });
+
+                    document.querySelectorAll(".closeBtn").forEach((button) => {
+                        button.addEventListener("click", function () {
+                            const id = this.dataset.id; // Get ID from data attribute
+                            document.getElementById("deleteModal" + id).style.display = "none";
+                        });
+                    });
+
+                    window.addEventListener("click", function (event) {
+                        document.querySelectorAll("[id^='deleteModal']").forEach((modal) => {
+                            if (event.target === modal) {
+                                modal.style.display = "none";
+                            }
+                        });
+                    });
+                });
+            </script>
+        @endforeach
     </ul>
+
+    <a href="{{ route ('faq.create') }}" class="button">Make New FAQ Post</a>
     </body>
 </x-layout.main>
