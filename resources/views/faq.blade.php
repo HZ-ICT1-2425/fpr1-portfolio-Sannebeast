@@ -86,7 +86,7 @@
             <input type="checkbox" name="accordion" id="{{ $faq->id }}">
             <label for="{{ $faq->id }}">{{ $faq->question }}<a href="{{ route ('faq.edit') }}">Edit</a><button id="deleteBtn{{ $faq->id }}">Delete</button></label>
             <div class="content">
-                <p>{{ $faq->answer     }}</p>
+                <p>{{ $faq->answer }}</p>
             </div>
         </li>
 

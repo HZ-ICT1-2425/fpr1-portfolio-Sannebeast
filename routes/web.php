@@ -25,3 +25,4 @@ Route::get('blogs', [BlogController::class, 'index'])->name('blogs');
 Route::get('blogs/create', [BlogController::class, 'create'])->name('blogs.create');
 Route::post('blogs', [BlogController::class, 'store'])->name('blogs.store');
 Route::delete('blogs/{blog}', [BlogController::class, 'delete'])->name('blogs.delete');
+Route::get('blogs/{blog}', [BlogController::class, 'show'])->name('blogs.show');

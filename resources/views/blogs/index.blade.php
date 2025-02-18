@@ -4,7 +4,9 @@
     @foreach($blogs as $blog)
         <div class="blog-block">
             <h2>{{ $blog->title }}</h2><button id="deleteBtn{{ $blog->id }}">Delete</button>
-            <p></p>
+            <br>
+            <a href="{{ route('blogs.show', $blog) }}">
+            Read more...</a>
         </div>
 
             <div id="deleteModal{{ $blog->id }}" class="modal">

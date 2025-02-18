@@ -31,7 +31,7 @@ class FaqController extends Controller
      * @param Faq $faq
      * @return void
      */
-    public function delete(Faq $faq)
+    public function destroy(Faq $faq)
     {
         $faq->delete();
         return redirect()->route('faq');
@@ -40,19 +40,16 @@ class FaqController extends Controller
     /**
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store()
+    public function store(Request $request)
     {
-        // Create a new Post model object
-        $post = new Faq();
-        // Copy request data (representing the form inputs) to the
-        // object's properties
-        $post->question = request()['question'];
-        $post->answer = request()['answer'];
-        $post->link = request()['link'];
-        // Save the model's state to the database
-        // (which means inserting a new record in this case)
-        $post->save();
-        // Redirect to the blogs index page
+        $request->validate([
+            'question' => 'required|string|max:255',
+            'answer' => 'required|string',
+            'link' => 'nullable|url',
+        ]);
+
+        Faq::create($request->only(['question', 'answer', 'link']));
+
         return redirect()->route('faq');
     }
 
@@ -61,7 +58,7 @@ class FaqController extends Controller
      */
     public function edit(Faq $faq)
     {
-        return view('faq.edit');
+        return view('faq.edit', compact('faq'));
     }
 
     /**
