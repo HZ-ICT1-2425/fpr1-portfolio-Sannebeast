@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 class FaqController extends Controller
 {
     /**
-     * Display a listing of Posts.
+     * Display a listing of faqs.
      */
     public function index()
     {
@@ -20,11 +20,25 @@ class FaqController extends Controller
     }
 
     /**
-     * shows user blogs page
+     * shows user faq page
      */
     public function create()
     {
         return view('faq.create');
+    }
+
+    /**
+     * Updates faq
+     */
+    public function update(Request $request, Faq $faq)
+    {
+        $validated = $request->validate([
+            'question' => 'required',
+            'answer' => 'required'
+        ]);
+
+        $faq->update($validated);
+        return redirect()->route('faq');
     }
 
     /**
@@ -54,15 +68,17 @@ class FaqController extends Controller
     }
 
     /**
-     * editing post
+     * editing faq
      */
     public function edit(Faq $faq)
     {
-        return view('faq.edit', compact('faq'));
+        return view('faq.edit', [
+            'faq' => $faq
+        ]);
     }
 
     /**
-     * Shows specified blog
+     * Shows specified faq
      */
     public function show(Faq $faq)
     {

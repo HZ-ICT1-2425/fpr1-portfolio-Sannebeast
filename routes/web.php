@@ -16,7 +16,8 @@ Route::get('faq', [FaqController::class, 'index'])->name('faq');
 Route::get('faq/create', [FaqController::class, 'create'])->name('faq.create');
 Route::post('faq', [FaqController::class, 'store'])->name('faq.store');
 Route::delete('faq/{faq}', [FaqController::class, 'delete'])->name('faq.delete');
-route::get('faq/edit', [FaqController::class, 'edit'])->name('faq.edit');
+route::get('faq/{faq}/edit', [FaqController::class, 'edit'])->name('faq.edit');
+Route::put('faq/{faq}', [FaqController::class, 'update'])->name('faq.update');
 
 /**
  * Routes about blogs
