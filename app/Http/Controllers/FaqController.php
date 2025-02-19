@@ -45,7 +45,7 @@ class FaqController extends Controller
      * @param Faq $faq
      * @return void
      */
-    public function destroy(Faq $faq)
+    public function delete(Faq $faq)
     {
         $faq->delete();
         return redirect()->route('faq');

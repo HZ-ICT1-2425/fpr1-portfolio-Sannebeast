@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Blog;
+use App\Models\Faq;
 use Illuminate\View\View;
 
 use Illuminate\Http\Request;
@@ -27,6 +28,20 @@ class BlogController extends Controller
     }
 
     /**
+     * Updates blog
+     */
+    public function update(Request $request, Blog $blog)
+    {
+        $validated = $request->validate([
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $blog->update($validated);
+        return redirect()->route('blogs');
+    }
+
+    /**
      * deletes blog post
      */
     public function delete(Blog $blog)
@@ -48,6 +63,16 @@ class BlogController extends Controller
         $post->save();
         // Redirect to the blogs index page
         return redirect()->route('blogs');
+    }
+
+    /**
+     * editing blog
+     */
+    public function edit(Blog $blog)
+    {
+        return view('blogs.edit', [
+            'blog' => $blog
+        ]);
     }
 
     /**
