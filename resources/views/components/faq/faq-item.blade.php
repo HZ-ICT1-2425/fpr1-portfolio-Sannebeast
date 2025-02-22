@@ -41,9 +41,9 @@
     }
 </style>
 <details class="faq_item">
-    <summary class="faq_title">{{ $faq->question }}</summary>
+    <summary class="faq_title">{!!$faq->question!!}</summary>
     <div class="faq_content">
-        <p>{{ $faq->answer }}</p>
+        <p>{!!$faq->answer !!}</p>
         <div class="has-text-right is-flex is-flex-direction-column gap-2">
             <a href="{{ route('faq.edit', $faq->id) }}" class="button is-primary">Edit</a>
 

@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Blog;
-use App\Models\Faq;
-use Illuminate\View\View;
 
 use Illuminate\Http\Request;
 
@@ -49,6 +48,10 @@ class BlogController extends Controller
         $blog->delete();
         return redirect()->route('blogs');
     }
+
+    /**
+     * stores data of new blog
+     */
     public function store()
     {
         // Create a new Post model object
