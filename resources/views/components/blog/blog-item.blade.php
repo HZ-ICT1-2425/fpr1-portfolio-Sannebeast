@@ -42,7 +42,7 @@
 </style>
 {{--<details class="blog_item">--}}
         <div class="has-text-right is-flex is-flex-direction-column gap-2">
-            <a href="{{ route('blogs.edit', ['blog' => $blog->id]) }}">Edit</a>
+            <a href="{{ route('blogs.edit', ['blog' => $blog->id]) }}" class="button">Edit</a>
 
             <!-- Unique Delete Button -->
             <button id="deleteBtn{{ $blog->id }}" class="button">Delete</button>
